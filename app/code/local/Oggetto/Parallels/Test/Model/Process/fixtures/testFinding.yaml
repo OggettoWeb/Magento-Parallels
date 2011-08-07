@@ -1,0 +1,3 @@
+config:
+    global/parallels/process/test_process/model: 'parallels/process'
+    global/parallels/process/test_process/method: 'execute'
