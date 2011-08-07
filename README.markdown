@@ -33,8 +33,8 @@ Then go to your module's class where you want to run these calculations and writ
     Mage::getModel('parallels/runner')->run('do_my_calculations', array(2, 3));
 
 `run` method has 2 arguments: 
-* process identifier which we mentioned in config.xml
-* array with arguments which will be passed to the callback method
+1.  Process identifier which we mentioned in config.xml
+2.  Array with arguments which will be passed to the callback method
 
 So after this `bigCalculations` execution will be forwarded to the separate process with 
 specified arguments (in our case it will just do 2*3 and sleep). Please note, that in callback method
