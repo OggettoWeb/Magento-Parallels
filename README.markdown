@@ -33,6 +33,7 @@ Then go to your module's class where you want to run these calculations and writ
     Mage::getModel('parallels/runner')->run('do_my_calculations', array(2, 3));
 
 `run` method has 2 arguments: 
+
 1.  Process identifier which we mentioned in config.xml
 2.  Array with arguments which will be passed to the callback method
 
