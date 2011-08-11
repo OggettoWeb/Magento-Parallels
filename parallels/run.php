@@ -48,5 +48,5 @@ try {
     $config->registerProcess($process, $registry);
     $registry->call($process, $argv);
 } catch (Exception $e) {
-    Mage::logException($e);
+    Mage::printException($e);
 }

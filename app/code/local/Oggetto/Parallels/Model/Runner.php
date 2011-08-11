@@ -48,7 +48,7 @@ class Oggetto_Parallels_Model_Runner
      * @param string $process 
      * @param array $arguments 
      */
-    public function run($process, $arguments)
+    public function run($process, $arguments = array())
     {
         $arguments = "'" . implode("' '", $arguments) . "'";
         $execFile = Mage::getBaseDir() . DS . self::EXEC_DIR_PATH . DS . self::SH_FILENAME;
