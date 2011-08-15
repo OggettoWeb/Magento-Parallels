@@ -21,10 +21,12 @@ And in some request you wanna run it in a backround. In your module add the foll
 
     <global>
         <parallels>
-            <do_my_calculations>
-                <model>mymodule/model</model>
-                <method>bigCalculations</method>
-            </do_my_calculations>
+            <process>
+                <do_my_calculations>
+                    <model>mymodule/model</model>
+                    <method>bigCalculations</method>
+                </do_my_calculations>
+            </process>
         </parallels>
     </global>
 
