@@ -35,7 +35,7 @@ class Oggetto_Parallels_Model_Config
     /**
      *  Processes path in xml configs
      */
-    const XML_PATH_PROCESSES = 'global/parallels/process';
+    const XML_PATH_PROCESSES = 'global/parallels';
 
     /**
      * Register process in the registry
