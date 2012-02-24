@@ -1,6 +1,7 @@
 #!/bin/sh
 PHPSCRIPT=run.php
-OUTFILE=out.txt
+OUTFILE='../var/log/parallels.log'
+touch "$OUTFILE"
 PHP_BIN=`which php`
 #PHP_BIN='/Applications/XAMPP/xamppfiles/bin/php'
 INSTALLDIR=`echo $0 | sed 's/run\.sh//g'`

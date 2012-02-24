@@ -11,7 +11,7 @@ Usage
 
 For example you have a model class `mymodule/model` with a method:
 
-    function bigCalculations($a, $b) 
+    function bigCalculations($a, $b)
     {
         $c = $a * $b;
         sleep(30); // Just relax
@@ -34,13 +34,13 @@ Then go to your module's class where you want to run these calculations and writ
 
     Mage::getModel('parallels/runner')->run('do_my_calculations', array(2, 3));
 
-`run` method has 2 arguments: 
+`run` method has 2 arguments:
 
 1.  Process identifier which we mentioned in config.xml
 2.  Array with arguments which will be passed to the callback method
 
-So after this `bigCalculations` execution will be forwarded to the separate process with 
+So after this `bigCalculations` execution will be forwarded to the separate process with
 specified arguments (in our case it will just do 2*3 and sleep). Please note, that in callback method
 you are free to use any Magento-related stuff like `Mage::getModel(...)`, etc.
 
-Also, `parallels/out.txt` file will contain output from the last parallel process call. This may help with debugging.
+Also, `var/log/parallels.log` file will contain output from the last parallel process call. This may help with debugging.
