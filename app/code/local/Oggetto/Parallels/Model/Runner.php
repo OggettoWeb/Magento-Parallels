@@ -50,7 +50,8 @@ class Oggetto_Parallels_Model_Runner
      */
     public function run($process, $arguments = array())
     {
-        $arguments = "'" . implode("' '", $arguments) . "'";
+        $arguments = array_map('escapeshellarg', $arguments);
+        $arguments = implode(' ', $arguments);
         $execFile = Mage::getBaseDir() . DS . self::EXEC_DIR_PATH . DS . self::SH_FILENAME;
         $this->exec("{$execFile} {$process} {$arguments}");
     }
