@@ -11,28 +11,37 @@ Usage
 
 For example you have a model class `mymodule/model` with a method:
 
-    function bigCalculations($a, $b)
-    {
-        $c = $a * $b;
-        sleep(30); // Just relax
-    }
+``````php
+<?php
+
+function bigCalculations($a, $b)
+{
+    $c = $a * $b;
+    sleep(30); // Just relax
+}
+``````
 
 And in some request you wanna run it in a backround. In your module add the following to config.xml
 
-    <global>
-        <parallels>
-            <process>
-                <do_my_calculations>
-                    <model>mymodule/model</model>
-                    <method>bigCalculations</method>
-                </do_my_calculations>
-            </process>
-        </parallels>
-    </global>
+``````xml
+<global>
+    <parallels>
+        <process>
+            <do_my_calculations>
+                <model>mymodule/model</model>
+                <method>bigCalculations</method>
+            </do_my_calculations>
+        </process>
+    </parallels>
+</global>
+``````
 
 Then go to your module's class where you want to run these calculations and write:
 
-    Mage::getModel('parallels/runner')->run('do_my_calculations', array(2, 3));
+``````php
+<?php
+Mage::getModel('parallels/runner')->run('do_my_calculations', array(2, 3));
+``````
 
 `run` method has 2 arguments:
 
