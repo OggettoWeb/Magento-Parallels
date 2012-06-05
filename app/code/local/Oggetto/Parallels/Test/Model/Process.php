@@ -1,4 +1,4 @@
-<?php 
+<?php
 /**
  * Oggetto parallels extension for Magento
  *
@@ -7,7 +7,7 @@
  * This source file is subject to the Open Software License (OSL 3.0)
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
- * http://opensource.org/licenses/osl-3.0.php * 
+ * http://opensource.org/licenses/osl-3.0.php *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade
@@ -26,14 +26,14 @@
  *
  * @category   Oggetto
  * @package    Oggetto_Parallels
- * @copyright  Copyright (C) 2011 
+ * @copyright  Copyright (C) 2011
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 class Oggetto_Parallels_Test_Model_Process extends EcomDev_PHPUnit_Test_Case
 {
     /**
      * Test parallel process calling from the application
-     * 
+     *
      * @test
      */
     public function testParallelProcessRunniung()
@@ -41,13 +41,13 @@ class Oggetto_Parallels_Test_Model_Process extends EcomDev_PHPUnit_Test_Case
         $runner = $this->getModelMock('parallels/runner', array('exec'));
         $runner->expects($this->once())
             ->method('exec')
-            ->with($this->stringEndsWith("parallels/run.sh test_process 'arg one' 'arg two' 'thr'\''ee'"));
+            ->with($this->stringEndsWith(".parallels/run.sh test_process 'arg one' 'arg two' 'thr'\''ee'"));
         $runner->run('test_process', array('arg one', 'arg two', "thr'ee"));
     }
 
     /**
      * Test process execution from registry
-     * 
+     *
      * @test
      */
     public function testExecutionFromRegistry()
@@ -67,7 +67,7 @@ class Oggetto_Parallels_Test_Model_Process extends EcomDev_PHPUnit_Test_Case
 
     /**
      * Test process finding from config
-     * 
+     *
      * @test
      * @loadFixture
      */
@@ -81,7 +81,7 @@ class Oggetto_Parallels_Test_Model_Process extends EcomDev_PHPUnit_Test_Case
         $registry->expects($this->once())
                  ->method('add')
                  ->with(
-                     $this->equalTo('test_process'), 
+                     $this->equalTo('test_process'),
                      $this->equalTo($process),
                      $this->equalTo('execute')
                  );
