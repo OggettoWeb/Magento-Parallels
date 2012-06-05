@@ -8,7 +8,7 @@
  * that is bundled with this package in the file LICENSE.txt.
  * It is also available through the world-wide-web at this URL:
  * http://opensource.org/licenses/osl-3.0.php
- * 
+ *
  * DISCLAIMER
  *
  * Do not edit or add to this file if you wish to upgrade
@@ -35,7 +35,7 @@ class Oggetto_Parallels_Model_Runner
     /**
      * Execution files dir
      */
-    const EXEC_DIR_PATH = 'parallels';
+    const EXEC_DIR_PATH = '.parallels';
 
     /**
      * Execution file name
@@ -44,9 +44,9 @@ class Oggetto_Parallels_Model_Runner
 
     /**
      * Run the process
-     * 
-     * @param string $process 
-     * @param array $arguments 
+     *
+     * @param string $process
+     * @param array $arguments
      */
     public function run($process, $arguments = array())
     {
@@ -58,7 +58,7 @@ class Oggetto_Parallels_Model_Runner
 
     /**
      * Execute the command
-     * 
+     *
      * @param string $command
      */
     public function exec($command)

@@ -4,7 +4,7 @@ Run heavy pieces of your Magento code in a background process to increase page l
 Installation
 ------------
 
-Just copy files to your magento directory. Make file /var/log/parallels.txt writeable and parallels/run.sh executable.
+Just copy files to your magento directory. Make file /var/log/parallels.txt writeable and .parallels/run.sh executable.
 
 Usage
 -----
