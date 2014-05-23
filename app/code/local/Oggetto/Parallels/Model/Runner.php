@@ -63,6 +63,10 @@ class Oggetto_Parallels_Model_Runner
      */
     public function exec($command)
     {
-        exec($command);
+        if (strpos(strtolower(php_uname()), 'windows') !== false){
+            pclose(popen("start /B ". $command, "r"));
+        } else {
+            exec($command . " > /dev/null &");
+        }
     }
 }
