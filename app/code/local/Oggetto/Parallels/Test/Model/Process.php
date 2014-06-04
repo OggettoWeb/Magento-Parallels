@@ -88,19 +88,4 @@ class Oggetto_Parallels_Test_Model_Process extends EcomDev_PHPUnit_Test_Case
 
         $config->registerProcess('test_process', $registry);
     }
-
-    /**
-     * Test command is executed in the background without PHP waiting for it to finish
-     *
-     * @return void
-     */
-    public function testRunsWithoutWaitingForFinish()
-    {
-        $startTime = time();
-
-        Mage::getModel('parallels/runner')->exec('sleep 10');
-
-        $resultTime = time() - $startTime;
-        $this->assertLessThan(2, $resultTime);
-    }
 }
