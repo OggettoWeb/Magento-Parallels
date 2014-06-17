@@ -24,6 +24,10 @@
  * @license     http://www.magentocommerce.com/license/enterprise-edition
  */
 
+if (file_exists(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php')) {
+    require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+}
+
 require 'app/Mage.php';
 
 if (!Mage::isInstalled()) {
