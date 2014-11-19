@@ -37,14 +37,14 @@ class Oggetto_Parallels_Model_Registry
      * 
      * @var array
      */
-    protected $_processes = array();
+    protected $_processes = [];
 
     /**
      * Add process to the registry
      * 
-     * @param string $processCode 
-     * @param Oggetto_Parallels_Model_Process_Interface $process 
-     * @param string $method
+     * @param string                                    $processCode Process code
+     * @param Oggetto_Parallels_Model_Process_Interface $process     Process model
+     * @param string                                    $method      Method
      * @return Oggetto_Parallels_Model_Registry
      */
     public function add($processCode, $process, $method)
@@ -57,18 +57,36 @@ class Oggetto_Parallels_Model_Registry
     /**
      * Call registered process by code
      * 
-     * @param string $processCode 
-     * @param array $params
+     * @param string $processCode Process code
+     * @param array  $params      Parameters
      * @return Oggetto_Parallels_Model_Registry
      */
-    public function call($processCode, $params = array())
+    public function call($processCode, $params = [])
     {
+        $params = $this->_unserializeParams($params);
+
         call_user_func_array(
-            array(
+            [
                 $this->_processes[$processCode]['model'], 
                 $this->_processes[$processCode]['method']
-            ), $params
+            ], $params
         );
         return $this;
+    }
+
+    /**
+     * Unserialize params
+     *
+     * @param array $params Parameters
+     * @return array
+     */
+    private function _unserializeParams(array $params)
+    {
+        return array_map(function ($param) {
+            if ($encoded = base64_decode($param, true)) {
+                return unserialize($encoded);
+            }
+            return $param;
+        }, $params);
     }
 }

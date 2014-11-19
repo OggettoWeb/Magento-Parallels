@@ -39,11 +39,26 @@ class Oggetto_Parallels_Model_Runner
      * @param array  $arguments Arguments
      * @return void
      */
-    public function run($process, $arguments = array())
+    public function run($process, $arguments = [])
     {
+        $arguments = $this->_serializeObjects($arguments);
+
         Mage::getModel('parallels/driver')->factory(
             Mage::helper('parallels')->getDriverCode()
         )
             ->run($process, $arguments);
+    }
+
+    /**
+     * Serialize objects in arguments
+     *
+     * @param array $arguments Arguments
+     * @return array
+     */
+    private function _serializeObjects(array $arguments)
+    {
+        return array_map(function ($arg) {
+            return is_object($arg) ? base64_encode(serialize($arg)) : $arg;
+        }, $arguments);
     }
 }
