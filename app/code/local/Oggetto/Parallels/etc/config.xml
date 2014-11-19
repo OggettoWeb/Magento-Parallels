@@ -24,6 +24,11 @@
  */
 -->
 <config>
+    <modules>
+        <Oggetto_Parallels>
+            <version>1.0.0</version>
+        </Oggetto_Parallels>
+    </modules>
     <phpunit>
         <suite>
             <modules>

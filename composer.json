@@ -1,5 +1,6 @@
 {
-    "name": "oggetto/parallels",
+    "name": "oggettoweb/parallels",
+    "version": "1.0.0",
     "type": "magento-module",
     "license": "OSL-3.0",
     "homepage": "https://github.com/dankocherga/Magento-Parallels",
