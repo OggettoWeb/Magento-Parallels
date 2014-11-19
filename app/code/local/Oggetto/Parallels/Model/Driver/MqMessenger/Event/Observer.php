@@ -57,9 +57,13 @@ class Oggetto_Parallels_Model_Driver_MqMessenger_Event_Observer
     public function observe(Oggetto_Messenger_Model_Event $event)
     {
         $this->_logger->info('A parallel task received.');
+
         $process = $event->getData()['process'];
         $arguments = $event->getData()['arguments'];
-        Mage::getModel('parallels/driver_exec')->run($process, $arguments);
+
+        $registry = Mage::getModel('parallels/registry');
+        Mage::getModel('parallels/config')->registerProcess($process, $registry);
+        $registry->call($process, $arguments);
     }
 
     /**

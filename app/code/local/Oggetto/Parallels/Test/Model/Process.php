@@ -35,6 +35,7 @@ class Oggetto_Parallels_Test_Model_Process extends EcomDev_PHPUnit_Test_Case
      * Test parallel process calling from the application
      *
      * @test
+     * @return void
      */
     public function testParallelProcessRunning()
     {
@@ -63,6 +64,7 @@ class Oggetto_Parallels_Test_Model_Process extends EcomDev_PHPUnit_Test_Case
      * Test process execution from registry
      *
      * @test
+     * @return void
      */
     public function testExecutionFromRegistry()
     {
@@ -84,6 +86,7 @@ class Oggetto_Parallels_Test_Model_Process extends EcomDev_PHPUnit_Test_Case
      *
      * @test
      * @loadFixture
+     * @return void
      */
     public function testFinding()
     {
