@@ -12,8 +12,7 @@
         }
     ],
     "require": {
-        "magento-hackathon/magento-composer-installer": "*",
-        "phpunit/phpunit": "3.7.*"
+        "magento-hackathon/magento-composer-installer": "*"
     },
     "extra": {
         "map": [
