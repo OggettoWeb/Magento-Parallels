@@ -33,40 +33,32 @@
 class Oggetto_Parallels_Model_Runner
 {
     /**
-     * Execution files dir
-     */
-    const EXEC_DIR_PATH = '.parallels';
-
-    /**
-     * Execution file name
-     */
-    const SH_FILENAME = 'run.sh';
-
-    /**
      * Run the process
      *
-     * @param string $process
-     * @param array $arguments
+     * @param string $process   Process
+     * @param array  $arguments Arguments
+     * @return void
      */
-    public function run($process, $arguments = array())
+    public function run($process, $arguments = [])
     {
-        $arguments = array_map('escapeshellarg', $arguments);
-        $arguments = implode(' ', $arguments);
-        $execFile = Mage::getBaseDir() . DS . self::EXEC_DIR_PATH . DS . self::SH_FILENAME;
-        $this->exec("{$execFile} {$process} {$arguments}");
+        $arguments = $this->_serializeObjects($arguments);
+
+        Mage::getModel('parallels/driver')->factory(
+            Mage::helper('parallels')->getDriverCode()
+        )
+            ->run($process, $arguments);
     }
 
     /**
-     * Execute the command
+     * Serialize objects in arguments
      *
-     * @param string $command
+     * @param array $arguments Arguments
+     * @return array
      */
-    public function exec($command)
+    private function _serializeObjects(array $arguments)
     {
-        if (strpos(strtolower(php_uname()), 'windows') !== false){
-            pclose(popen("start /B ". $command, "r"));
-        } else {
-            exec($command . " > /dev/null &");
-        }
+        return array_map(function ($arg) {
+            return is_object($arg) ? base64_encode(serialize($arg)) : $arg;
+        }, $arguments);
     }
 }

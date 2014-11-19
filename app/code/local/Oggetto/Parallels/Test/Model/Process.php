@@ -35,13 +35,28 @@ class Oggetto_Parallels_Test_Model_Process extends EcomDev_PHPUnit_Test_Case
      * Test parallel process calling from the application
      *
      * @test
+     * @return void
      */
-    public function testParallelProcessRunniung()
+    public function testParallelProcessRunning()
     {
-        $runner = $this->getModelMock('parallels/runner', array('exec'));
-        $runner->expects($this->once())
+        $helper = $this->getHelperMock('parallels/data', ['getDriverCode']);
+
+        $helper->expects($this->once())
+            ->method('getDriverCode')
+            ->will($this->returnValue('exec'));
+
+        $this->replaceByMock('helper', 'parallels', $helper);
+
+        $driver = $this->getModelMock('parallels/driver_exec', ['exec']);
+
+        $driver->expects($this->once())
             ->method('exec')
             ->with($this->stringEndsWith(".parallels/run.sh test_process 'arg one' 'arg two' 'thr'\''ee'"));
+
+        $this->replaceByMock('model', 'parallels/driver_exec', $driver);
+
+        $runner = Mage::getModel('parallels/runner');
+
         $runner->run('test_process', array('arg one', 'arg two', "thr'ee"));
     }
 
@@ -49,6 +64,7 @@ class Oggetto_Parallels_Test_Model_Process extends EcomDev_PHPUnit_Test_Case
      * Test process execution from registry
      *
      * @test
+     * @return void
      */
     public function testExecutionFromRegistry()
     {
@@ -70,6 +86,7 @@ class Oggetto_Parallels_Test_Model_Process extends EcomDev_PHPUnit_Test_Case
      *
      * @test
      * @loadFixture
+     * @return void
      */
     public function testFinding()
     {

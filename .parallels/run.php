@@ -28,7 +28,7 @@ if (file_exists(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SE
     require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 }
 
-require 'app/Mage.php';
+require __DIR__ . '../app/Mage.php';
 
 if (!Mage::isInstalled()) {
     echo "Application is not installed yet, please complete install wizard first.";

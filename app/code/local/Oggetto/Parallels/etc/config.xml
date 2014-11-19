@@ -24,6 +24,11 @@
  */
 -->
 <config>
+    <modules>
+        <Oggetto_Parallels>
+            <version>1.0.0</version>
+        </Oggetto_Parallels>
+    </modules>
     <phpunit>
         <suite>
             <modules>
@@ -37,6 +42,36 @@
                 <class>Oggetto_Parallels_Model</class>
             </parallels>
         </models>
+        <helpers>
+            <parallels>
+                <class>Oggetto_Parallels_Helper</class>
+            </parallels>
+        </helpers>
+        <messenger>
+            <event_observers>
+                <parallels_task_executed>
+                    <class>parallels/driver_mqMessenger_event_observer</class>
+                </parallels_task_executed>
+            </event_observers>
+            <publish_router>
+                <parallels_task_executed>
+                    <criterion>
+                        <name>parallels_task_executed</name>
+                    </criterion>
+                    <queue>magento_parallels</queue>
+                </parallels_task_executed>
+            </publish_router>
+        </messenger>
     </global>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Oggetto_Parallels>
+                    <files>
+                        <default>Oggetto_Parallels.csv</default>
+                    </files>
+                </Oggetto_Parallels>
+            </modules>
+        </translate>
+    </adminhtml>
 </config>
-
