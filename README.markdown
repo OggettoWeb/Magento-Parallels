@@ -6,6 +6,35 @@ Installation
 
 Just copy files to your magento directory. Make file var/log/parallels.txt writeable and parallels/run.sh executable.
 
+### via Composer
+
+Add to your composer
+
+```json
+{
+    ...
+    "require": {
+        ...
+        "oggettoweb/parallels": "dev-master",
+        ...
+    },
+    ...
+    "repositories": [
+        ...
+        {
+            "type": "vcs",
+            "url": "https://github.com/dankocherga/Magento-Parallels"
+        },
+        ...
+    ],
+    ...
+    "extra": {
+        "magento-root-dir": "."
+    }
+    ...
+}
+```
+
 Usage
 -----
 
@@ -53,3 +82,10 @@ specified arguments (in our case it will just do 2*3 and sleep). Please note, th
 you are free to use any Magento-related stuff like `Mage::getModel(...)`, etc.
 
 Also, `var/log/parallels.log` file will contain output from the last parallel process call. This may help with debugging.
+
+### With MQ messenger
+
+1. Install [Oggetto Messenger](https://github.com/OggettoWeb/messenger) module.
+2. Go to System -> Configuration -> Parallels Setup. Set `MQ messenger` in Parallels Driver selection.
+
+
