@@ -1,6 +1,6 @@
 <?php
 /**
- * Oggetto parallels extension for Magento
+ * Oggetto Web Parallels extension for Magento
  *
  * NOTICE OF LICENSE
  *
@@ -18,32 +18,42 @@
  *
  * @category   Oggetto
  * @package    Oggetto_Parallels
- * @copyright  Copyright (C) 2011 Oggetto Web (http://oggettoweb.com)
+ * @copyright  Copyright (C) 2014
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-
+ 
 /**
- * Parallel process runner
+ * Parallels driver system source
  *
  * @category   Oggetto
  * @package    Oggetto_Parallels
  * @subpackage Model
- * @author     Dan Kocherga <dan@oggettoweb.com>
+ * @author     Eduard Paliy <epaliy@oggettoweb.com>
  */
-class Oggetto_Parallels_Model_Runner
+class Oggetto_Parallels_Model_Driver
 {
     /**
-     * Run the process
+     * Driver factory aliases
      *
-     * @param string $process   Process
-     * @param array  $arguments Arguments
-     * @return void
+     * @var array
      */
-    public function run($process, $arguments = array())
+    private $_factory = [
+        'exec' => 'parallels/driver_exec',
+        'mq'   => 'parallels/driver_mqMessenger'
+    ];
+
+    /**
+     * Convert to options array
+     *
+     * @param string $code Parallels driver code
+     * @return Oggetto_Parallels_Model_Driver_Interface
+     */
+    public function factory($code)
     {
-        Mage::getModel('parallels/driver')->factory(
-            Mage::helper('parallels')->getDriverCode()
-        )
-            ->run($process, $arguments);
+        if (!isset($this->_factory[$code])) {
+            $code = 'exec';
+        }
+
+        return Mage::getModel($this->_factory[$code]);
     }
 }

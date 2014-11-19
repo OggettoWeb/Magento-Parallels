@@ -28,17 +28,43 @@
 class Oggetto_Parallels_Test_Model_Runner extends EcomDev_PHPUnit_Test_Case
 {
     /**
-     * Test command is executed in the background without PHP waiting for it to finish
+     * Test runs specified driver
      *
+     * @param string $process    Process name
+     * @param array  $args       Arguments
+     * @param string $driverCode Driver code
+     * @dataProvider dataProvider
      * @return void
      */
-    public function testRunsWithoutWaitingForFinish()
+    public function testRunsSpecifiedDriver($process, $args, $driverCode)
     {
-        $startTime = time();
+        $helper = $this->getHelperMock('parallels/data', ['getDriverCode']);
 
-        Mage::getModel('parallels/runner')->exec('sleep 10');
+        $helper->expects($this->once())
+            ->method('getDriverCode')
+            ->will($this->returnValue($driverCode));
 
-        $resultTime = time() - $startTime;
-        $this->assertLessThan(2, $resultTime);
+        $this->replaceByMock('helper', 'parallels', $helper);
+
+
+        $driver = $this->getMock('Oggetto_Parallels_Model_Driver_Interface', ['run']);
+
+        $driver->expects($this->once())
+            ->method('run')
+            ->with(
+                $this->equalTo($process),
+                $this->equalTo($args)
+            );
+
+        $factory = $this->getModelMock('parallels/driver', ['factory']);
+
+        $factory->expects($this->once())
+            ->method('factory')
+            ->with($this->equalTo($driverCode))
+            ->will($this->returnValue($driver));
+
+        $this->replaceBymock('model', 'parallels/driver', $factory);
+
+        Mage::getModel('parallels/runner')->run($process, $args);
     }
 }

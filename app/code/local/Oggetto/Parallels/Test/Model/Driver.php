@@ -1,6 +1,6 @@
 <?php
 /**
- * Oggetto parallels extension for Magento
+ * Oggetto Web Parallels extension for Magento
  *
  * NOTICE OF LICENSE
  *
@@ -18,32 +18,33 @@
  *
  * @category   Oggetto
  * @package    Oggetto_Parallels
- * @copyright  Copyright (C) 2011 Oggetto Web (http://oggettoweb.com)
+ * @copyright  Copyright (C) 2014
  * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
 
 /**
- * Parallel process runner
+ * Parallels driver test
  *
  * @category   Oggetto
  * @package    Oggetto_Parallels
- * @subpackage Model
- * @author     Dan Kocherga <dan@oggettoweb.com>
+ * @subpackage Test
+ * @author     Eduard Paliy <epaliy@oggettoweb.com>
  */
-class Oggetto_Parallels_Model_Runner
+class Oggetto_Parallels_Test_Model_Driver extends EcomDev_PHPUnit_Test_Case
 {
     /**
-     * Run the process
+     * Test returns driver from factory
      *
-     * @param string $process   Process
-     * @param array  $arguments Arguments
+     * @param string $code Driver code
+     * @dataProvider dataProvider
+     * @loadExpectation
      * @return void
      */
-    public function run($process, $arguments = array())
+    public function testReturnsDriverFromFactory($code)
     {
-        Mage::getModel('parallels/driver')->factory(
-            Mage::helper('parallels')->getDriverCode()
-        )
-            ->run($process, $arguments);
+        $this->assertInstanceOf(
+            $this->expected($code)->getDriverClass(),
+            Mage::getModel('parallels/driver')->factory($code)
+        );
     }
 }
